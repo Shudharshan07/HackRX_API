@@ -78,7 +78,6 @@ class SemanticQAEngine:
 
 
 # ----------- Route -----------
-engine = SemanticQAEngine()
 
 @app.post("/hackrx/run", response_model=OutputPayload)
 async def run_pipeline(payload: InputPayload, Authorization: Optional[str] = Header(None)):
@@ -89,6 +88,7 @@ async def run_pipeline(payload: InputPayload, Authorization: Optional[str] = Hea
         raw_text = loader.extract_text(pdf_path)
 
         # Step 2: Build semantic QA engine
+        engine = SemanticQAEngine()
         engine.chunk_text(raw_text)
         engine.build_index()
 
