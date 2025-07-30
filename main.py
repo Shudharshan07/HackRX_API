@@ -81,9 +81,6 @@ class SemanticQAEngine:
 
 @app.post("/hackrx/run", response_model=OutputPayload)
 async def run_pipeline(payload: InputPayload, Authorization: Optional[str] = Header(None)):
-    if not Authorization or not Authorization.startswith("Bearer "):
-        raise HTTPException(status_code=401, detail="Unauthorized")
-
     try:
         # Step 1: Load and parse document
         loader = DocumentLoader(payload.documents)
